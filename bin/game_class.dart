@@ -7,7 +7,8 @@ class Game {
   String character = ""; // 캐릭터
   List<Monster> monsterList = []; //몬스터 리스트
   int dftdCnt = 0; // 물리친 몬스터 개수
-  Character characterObj = Character();
+  Character characterObj = Character(); //character_class
+  Monster monsterObj = Monster(); //monster_class
   //게임 시작 메서드
   void startGame() async {
     print('캐릭터 이름을 입력하세요 🦹 :');
@@ -19,6 +20,9 @@ class Game {
     await characterObj.loadCharacter();
     print('게임을 시작합니다!');
     characterObj.showStatus();
+
+    print('새로운 몬스터가 나타났습니다!!');
+    await monsterObj.loadMonster(characterObj);
   }
 
   //전투진행 메서드

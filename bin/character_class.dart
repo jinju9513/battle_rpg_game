@@ -15,7 +15,7 @@ class Character {
     for (var charValue in characterList) {
       List<String> charValues = charValue.split(',');
 
-      print('파싱값 : $charValues');
+      // print('파싱값 : $charValues');
       chHealth = int.parse(charValues[0]);
       chPower = int.parse(charValues[1]);
       chDefense = int.parse(charValues[2]);

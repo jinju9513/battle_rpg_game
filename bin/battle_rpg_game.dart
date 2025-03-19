@@ -5,4 +5,5 @@ import 'game_class.dart';
 void main(List<String> arguments) {
   Game game = Game();
   game.startGame();
+
 }
