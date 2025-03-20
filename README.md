@@ -1,2 +1,19 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+# 🎮 RPG Battle Game
+
+🚀 **콘솔 기반 RPG 배틀 게임!**  
+플레이어는 몬스터와 싸우고, 체력을 관리하며, 전투 결과를 저장할 수 있습니다.  
+이 게임은 **Dart**로 작성되었으며, 기본적인 RPG 전투 시스템을 제공합니다.
+
+---
+
+## 📌 기능 목록
+- 🦸‍♂️ **캐릭터 선택 및 로드** (파일에서 캐릭터 데이터를 읽어옴)
+- 🏹 **몬스터와 턴제 전투** (공격 / 방어)
+- 🎲 **랜덤 몬스터 소환**
+- ⚔ **플레이어 & 몬스터의 공격 턴 구현**
+- 🏆 **모든 몬스터 처치 시 승리, 체력 0이 되면 패배**
+- 📄 **게임 종료 후 결과 저장 (`result.txt`)**
+
+
+
+
