@@ -31,7 +31,10 @@ class Game {
     await characterObj.loadCharacter();
     print('게임을 시작합니다!');
     characterObj.showStatus();
-    getRandomMonster();
+    await getRandomMonster();
+
+    battle();
+  
   }
 
   //전투진행 메서드
@@ -40,9 +43,9 @@ class Game {
       print('$character의 턴');
       print('행동을 선택하세요 (1 : 공격, 2 : 방어)');
       String? action = stdin.readLineSync();
-      if (action == 1) {
+      if (action == '1') {
         characterObj.attackMonster(monsterObj);
-      } else if (action == 2) {
+      } else if (action == '2') {
         characterObj.defend();
       } else {
         print('잘못된 입력입니다. 다시 입력해주세요.');
@@ -57,7 +60,7 @@ class Game {
 
 }
   //랜덤으로 몬스터 불러오는 메서드
-  void getRandomMonster() async {
+  Future<void> getRandomMonster() async {
     print('새로운 몬스터가 나타났습니다!!!');
     await monsterObj.loadMonster(characterObj);
   }

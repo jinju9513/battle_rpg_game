@@ -34,7 +34,7 @@ class Character {
   void attackMonster(Monster monster) {
     int damage = max(chPower, 0);//공격력은 최소 0이상
     monster.monHealth -=damage; //몬스터 체력감소
-    print('$chName이(가) ${monster.monHealth}에게 $damage의 데지미를 입혔습니다.');
+    print('$chName이(가) ${monster.monName}에게 $damage의 데지미를 입혔습니다.');
   }
   //방어 메서드
   void defend() {
