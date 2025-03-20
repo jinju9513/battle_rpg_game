@@ -29,39 +29,51 @@ class Game {
     //캐릭터 정보 로드
     characterObj.chName = character;
     await characterObj.loadCharacter();
-    print('게임을 시작합니다!');
+    print('\n게임을 시작합니다!');
     characterObj.showStatus();
     await getRandomMonster();
 
-    battle();
-  
+    // battle();
   }
 
   //전투진행 메서드
   void battle() {
     while (characterObj.chHealth > 0 && monsterObj.monHealth > 0) {
       print('$character의 턴');
-      print('행동을 선택하세요 (1 : 공격, 2 : 방어)');
+      print('\n행동을 선택하세요 (1 : 공격, 2 : 방어)');
       String? action = stdin.readLineSync();
       if (action == '1') {
         characterObj.attackMonster(monsterObj);
       } else if (action == '2') {
         characterObj.defend();
       } else {
-        print('잘못된 입력입니다. 다시 입력해주세요.');
+        print('\n잘못된 입력입니다. 다시 입력해주세요.');
         continue;
       }
-  //몬스터 체력 체크
-      if(monsterObj.monHealth <= 0){
-        print('${monsterObj.monName}을(를) 물리쳤습니다!');
+      //몬스터 체력 체크
+      if (monsterObj.monHealth <= 0) {
+        print('\n${monsterObj.monName}을(를) 물리쳤습니다!');
         break;
       }
+
+      //몬스터 턴
+      print('${monsterObj.monName}의 턴');
+      monsterObj.attackCharacter(characterObj);
+
+      //캐릭터 체력 체크
+      if (characterObj.chHealth <= 0) {
+        print('\n${characterObj.chName}이(가) 쓰러졌습니다.... 게임 오버');
+        break;
+      }
+      // 현재 상태 출력
+      // print('\n${characterObj.chName} - 체력: ${characterObj.chHealth}, 공격력: ${characterObj.chPower}, 방어력: ${characterObj.chDefense}');
+      // print('${monsterObj.monName} - 체력: ${monsterObj.monHealth}, 공격력: ${monsterObj.monPower}');
+    }
   }
 
-}
   //랜덤으로 몬스터 불러오는 메서드
   Future<void> getRandomMonster() async {
-    print('새로운 몬스터가 나타났습니다!!!');
+    print('\n새로운 몬스터가 나타났습니다!!!');
     await monsterObj.loadMonster(characterObj);
   }
 }
