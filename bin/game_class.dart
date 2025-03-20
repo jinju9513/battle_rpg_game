@@ -37,6 +37,8 @@ class Game {
       await getRandomMonster(); // 새 몬스터 등장
       battle(); // 전투 진행
 
+      dftdCnt++; //물리친 몬스터 수 증가
+
       // 모든 몬스터 처치 후 계속 싸울지 물어보기
       if (characterObj.chHealth > 0) {
         print("\n다음 몬스터와 싸우시겠습니까? (y/n): ");
@@ -47,7 +49,22 @@ class Game {
         }
       }
     }
-    // battle();
+    // 게임 종료 메시지 출력
+    String gameResult = characterObj.chHealth > 0 ? "승리" : "패배";
+    if (characterObj.chHealth > 0) {
+      print("🎉 모든 몬스터를 물리쳤습니다! 축하합니다! 🎉");
+    } else {
+      print("😵 ${characterObj.chName}이(가) 쓰러졌습니다... 게임 오버!");
+    }
+
+    // 결과 저장 여부 확인
+    print("\n결과를 저장하시겠습니까? (y/n): ");
+    String? saveAnswer = stdin.readLineSync();
+    if (saveAnswer != null && saveAnswer.toLowerCase() == 'y') {
+      saveGameResult(characterObj.chName, characterObj.chHealth, gameResult);
+    }
+
+    print("게임을 종료합니다.");
   }
 
   //전투진행 메서드
@@ -80,9 +97,28 @@ class Game {
         break;
       }
       // 현재 상태 출력
-      print('\n${characterObj.chName} - 체력: ${characterObj.chHealth}, 공격력: ${characterObj.chPower}, 방어력: ${characterObj.chDefense}');
-      print('${monsterObj.monName} - 체력: ${monsterObj.monHealth}, 공격력: ${monsterObj.monPower}');
+      print(
+        '\n${characterObj.chName} - 체력: ${characterObj.chHealth}, 공격력: ${characterObj.chPower}, 방어력: ${characterObj.chDefense}',
+      );
+      print(
+        '${monsterObj.monName} - 체력: ${monsterObj.monHealth}, 공격력: ${monsterObj.monPower}',
+      );
     }
+  }
+
+  // 결과 저장 메서드
+  void saveGameResult(
+    String characterName,
+    int remainingHealth,
+    String result,
+  ) {
+    File file = File('lib/result.txt'); // 저장할 파일
+    String resultText = "캐릭터: $characterName\n";
+    resultText += "남은 체력: $remainingHealth\n";
+    resultText += "게임 결과: $result\n";
+
+    file.writeAsStringSync(resultText);
+    print("\n✅ 게임 결과가 'result.txt' 파일에 저장되었습니다!");
   }
 
   //랜덤으로 몬스터 불러오는 메서드
