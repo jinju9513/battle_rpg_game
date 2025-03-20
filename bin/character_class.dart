@@ -37,5 +37,9 @@ class Character {
     print('$chName이(가) ${monster.monHealth}에게 $damage의 데지미를 입혔습니다.');
   }
   //방어 메서드
-  void defend() {}
+  void defend() {
+    int healAmount = 0; //방어시 회복량
+    chHealth +=healAmount;
+    print('$chName이(가) 방어태세를 취하여 $healAmount 만큼 체력을 얻었습니다.');
+  }
 }
