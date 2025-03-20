@@ -31,15 +31,29 @@ class Game {
     await characterObj.loadCharacter();
     print('\n게임을 시작합니다!');
     characterObj.showStatus();
-    await getRandomMonster();
 
+    // 몬스터와 계속 싸우는 루프 추가
+    while (characterObj.chHealth > 0) {
+      await getRandomMonster(); // 새 몬스터 등장
+      battle(); // 전투 진행
+
+      // 모든 몬스터 처치 후 계속 싸울지 물어보기
+      if (characterObj.chHealth > 0) {
+        print("\n다음 몬스터와 싸우시겠습니까? (y/n): ");
+        String? answer = stdin.readLineSync();
+        if (answer == null || answer.toLowerCase() != 'y') {
+          print("게임을 종료합니다.");
+          break;
+        }
+      }
+    }
     // battle();
   }
 
   //전투진행 메서드
   void battle() {
     while (characterObj.chHealth > 0 && monsterObj.monHealth > 0) {
-      print('$character의 턴');
+      print('\n$character의 턴');
       print('\n행동을 선택하세요 (1 : 공격, 2 : 방어)');
       String? action = stdin.readLineSync();
       if (action == '1') {
@@ -57,7 +71,7 @@ class Game {
       }
 
       //몬스터 턴
-      print('${monsterObj.monName}의 턴');
+      print('\n${monsterObj.monName}의 턴');
       monsterObj.attackCharacter(characterObj);
 
       //캐릭터 체력 체크
@@ -66,8 +80,8 @@ class Game {
         break;
       }
       // 현재 상태 출력
-      // print('\n${characterObj.chName} - 체력: ${characterObj.chHealth}, 공격력: ${characterObj.chPower}, 방어력: ${characterObj.chDefense}');
-      // print('${monsterObj.monName} - 체력: ${monsterObj.monHealth}, 공격력: ${monsterObj.monPower}');
+      print('\n${characterObj.chName} - 체력: ${characterObj.chHealth}, 공격력: ${characterObj.chPower}, 방어력: ${characterObj.chDefense}');
+      print('${monsterObj.monName} - 체력: ${monsterObj.monHealth}, 공격력: ${monsterObj.monPower}');
     }
   }
 

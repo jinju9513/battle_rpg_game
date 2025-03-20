@@ -28,7 +28,6 @@ class Monster {
     int maxPower = int.parse(monValues[2]); // 몬스터 공격력 최대값
     monPower = random.nextInt(maxPower + 1); // 0~maxPower까지 랜덤 값 생성
     monPower = max(monPower, characterObj.chDefense);
-    print(characterObj.chDefense);
     print('$monName - 체력 : $monHealth, 공격력 : $monPower');
   }
 
