@@ -35,7 +35,7 @@ class Monster {
   void attackCharacter(Character character) {
     int damage = max(monPower - character.chDefense, 0); //방어력 고려 데미지 계산 방어력이 공격력보다 높으면 최소 데미지를 0으로 설정
     character.chHealth -= damage; //캐릭터 체력 감소
-    print('$monName이(가) ${character.chName}에게 $damage의 데미지를 입혔습니다.');
+    print('\n$monName이(가) ${character.chName}에게 $damage의 데미지를 입혔습니다.');
   }
   //상태 출력 메서드
   void showStatus() {}
