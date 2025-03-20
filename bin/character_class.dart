@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'monster_class.dart';
 import 'dart:io';
 
@@ -7,6 +9,7 @@ class Character {
   int chHealth = 0;
   int chPower = 0;
   int chDefense = 0;
+  Monster monster = Monster();
 
   Future<void> loadCharacter() async {
     //캐릭터 데이터 파일 읽어오는 메서드
@@ -28,7 +31,11 @@ class Character {
   }
 
   //공격 메서드
-  void attackMonster(Monster monster) {}
+  void attackMonster(Monster monster) {
+    int damage = max(chPower, 0);//공격력은 최소 0이상
+    monster.monHealth -=damage; //몬스터 체력감소
+    print('$chName이(가) ${monster.monHealth}에게 $damage의 데지미를 입혔습니다.');
+  }
   //방어 메서드
   void defend() {}
 }
