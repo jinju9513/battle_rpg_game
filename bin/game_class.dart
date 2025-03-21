@@ -69,17 +69,26 @@ class Game {
 
   //전투진행 메서드
   void battle() {
+    int originalPower = characterObj.chPower; //원래 공격력
+
     while (characterObj.chHealth > 0 && monsterObj.monHealth > 0) {
       print('\n$character의 턴');
-      print('\n행동을 선택하세요 (1 : 공격, 2 : 방어)');
+      print('\n행동을 선택하세요 (1 : 공격, 2 : 방어 3 : 아이템 사용)');
       String? action = stdin.readLineSync();
       if (action == '1') {
         characterObj.attackMonster(monsterObj);
       } else if (action == '2') {
         characterObj.defend();
+      } else if (action == '3') {
+        characterObj.useItem();
       } else {
         print('\n잘못된 입력입니다. 다시 입력해주세요.');
         continue;
+      }
+
+      // 아이템 사용 후 다음 턴에서 공격력 원상복구
+      if (characterObj.hasUsedItem) {
+        characterObj.resetPower(originalPower);
       }
       //몬스터 체력 체크
       if (monsterObj.monHealth <= 0) {

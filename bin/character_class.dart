@@ -9,6 +9,7 @@ class Character {
   int chHealth = 0;
   int chPower = 0;
   int chDefense = 0;
+  bool hasUsedItem = false; //아이템 사용여부 변수
   Monster monster = Monster();
   Random random = Random();
 
@@ -34,6 +35,21 @@ class Character {
       chPower = int.parse(charValues[1]);
       chDefense = int.parse(charValues[2]);
     }
+  }
+
+  void useItem() {
+    if (hasUsedItem) {
+      print("⚠ 이미 아이템을 사용했습니다! 더 이상 사용할 수 없습니다.");
+      return;
+    }
+
+    hasUsedItem = true; // 아이템 사용 기록
+    chPower *= 2; // 한 턴 동안 공격력 2배 증가
+    print("🎉 아이템을 사용했습니다! 이번 턴 공격력: $chPower");
+  }
+
+  void resetPower(int originalPower) {
+    chPower = originalPower; // 다음 턴에 공격력 원상복구
   }
 
   //30% 확률로 체력 증가 기능
