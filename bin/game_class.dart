@@ -96,13 +96,9 @@ class Game {
         print('\n${characterObj.chName}이(가) 쓰러졌습니다.... 게임 오버');
         break;
       }
-      // 현재 상태 출력
-      print(
-        '\n${characterObj.chName} - 체력: ${characterObj.chHealth}, 공격력: ${characterObj.chPower}, 방어력: ${characterObj.chDefense}',
-      );
-      print(
-        '${monsterObj.monName} - 체력: ${monsterObj.monHealth}, 공격력: ${monsterObj.monPower}',
-      );
+
+      characterObj.showStatus();
+      monsterObj.showStatus();
     }
   }
 
@@ -125,5 +121,6 @@ class Game {
   Future<void> getRandomMonster() async {
     print('\n새로운 몬스터가 나타났습니다!!!');
     await monsterObj.loadMonster(characterObj);
+    monsterObj.showStatus();
   }
 }

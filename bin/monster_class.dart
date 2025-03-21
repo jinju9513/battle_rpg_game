@@ -28,7 +28,6 @@ class Monster {
     int maxPower = int.parse(monValues[2]); // 몬스터 공격력 최대값
     monPower = random.nextInt(maxPower + 1); // 0~maxPower까지 랜덤 값 생성
     monPower = max(monPower, characterObj.chDefense);
-    print('$monName - 체력 : $monHealth, 공격력 : $monPower');
   }
 
   //공격 메서드
@@ -38,5 +37,7 @@ class Monster {
     print('\n$monName이(가) ${character.chName}에게 $damage의 데미지를 입혔습니다.');
   }
   //상태 출력 메서드
-  void showStatus() {}
+  void showStatus() {
+    print('$monName - 체력 : $monHealth, 공격력 : $monPower');
+  }
 }
