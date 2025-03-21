@@ -31,7 +31,7 @@ class Game {
     await characterObj.loadCharacter();
     print('\n게임을 시작합니다!');
     characterObj.showStatus();
-
+    characterObj.applyBonusHealth();
     // 몬스터와 계속 싸우는 루프 추가
     while (characterObj.chHealth > 0) {
       await getRandomMonster(); // 새 몬스터 등장
