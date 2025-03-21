@@ -75,12 +75,14 @@ class Game {
       print('\n$character의 턴');
       print('\n행동을 선택하세요 (1 : 공격, 2 : 방어 3 : 아이템 사용)');
       String? action = stdin.readLineSync();
+
       if (action == '1') {
         characterObj.attackMonster(monsterObj);
       } else if (action == '2') {
         characterObj.defend();
       } else if (action == '3') {
         characterObj.useItem();
+        characterObj.attackMonster(monsterObj);
       } else {
         print('\n잘못된 입력입니다. 다시 입력해주세요.');
         continue;
