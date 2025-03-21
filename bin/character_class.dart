@@ -10,6 +10,7 @@ class Character {
   int chPower = 0;
   int chDefense = 0;
   Monster monster = Monster();
+  Random random = Random();
 
   Future<void> loadCharacter() async {
     //캐릭터 데이터 파일 읽어오는 메서드
@@ -22,6 +23,15 @@ class Character {
       chHealth = int.parse(charValues[0]);
       chPower = int.parse(charValues[1]);
       chDefense = int.parse(charValues[2]);
+    }
+    applyBonusHealth();
+  }
+
+  //30% 확률로 체력 증가 기능
+   void applyBonusHealth() {
+    if (random.nextDouble() < 0.3) { // 0.0 ~ 0.99 사이 난수 발생 (30% 확률)
+      chHealth += 10;
+      print('🎉 보너스 체력을 얻었습니다! 현재 체력: $chHealth');
     }
   }
 
