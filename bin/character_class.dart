@@ -34,7 +34,6 @@ class Character {
       chPower = int.parse(charValues[1]);
       chDefense = int.parse(charValues[2]);
     }
-    applyBonusHealth();
   }
 
   //30% 확률로 체력 증가 기능
