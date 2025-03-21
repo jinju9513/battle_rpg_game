@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'monster_class.dart';
 import 'character_class.dart';
 
@@ -10,7 +9,7 @@ class Game {
   int dftdCnt = 0; // 물리친 몬스터 개수
   Character characterObj = Character(); //character_class
   Monster monsterObj = Monster(); //monster_class
-  //게임 시작 메서드
+  ///게임 시작 메서드
   void startGame() async {
     // 유효한 캐릭터 이름 입력받기
     while (true) {
@@ -67,7 +66,7 @@ class Game {
     print("게임을 종료합니다.");
   }
 
-  //전투진행 메서드
+  ///전투진행 메서드
   void battle() {
     int originalPower = characterObj.chPower; //원래 공격력
 
@@ -113,7 +112,7 @@ class Game {
     }
   }
 
-  // 결과 저장 메서드
+  /// 결과 저장 메서드
   void saveGameResult(
     String characterName,
     int remainingHealth,
@@ -128,7 +127,7 @@ class Game {
     print("\n✅ 게임 결과가 'result.txt' 파일에 저장되었습니다!");
   }
 
-  //랜덤으로 몬스터 불러오는 메서드
+  ///랜덤으로 몬스터 불러오는 메서드
   Future<void> getRandomMonster() async {
     print('\n새로운 몬스터가 나타났습니다!!!');
     await monsterObj.loadMonster(characterObj);

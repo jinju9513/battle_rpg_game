@@ -11,8 +11,8 @@ class Monster {
   int monDegfense = 0; //→ 몬스터의 방어력은 0이라고 가정합니다.
   var random = Random();
 
+  ///캐릭터 데이터 파일 읽어오는 메서드
   Future<void> loadMonster(Character characterObj) async {
-    //캐릭터 데이터 파일 읽어오는 메서드
     var monster = File('lib/monsters.txt'); //monsters 파일 읽어오기
     List<String> monsterList = await monster.readAsLines();
     int randomIndex = random.nextInt(
@@ -30,13 +30,17 @@ class Monster {
     monPower = max(monPower, characterObj.chDefense);
   }
 
-  //공격 메서드
+  ///공격 메서드
   void attackCharacter(Character character) {
-    int damage = max(monPower - character.chDefense, 0); //방어력 고려 데미지 계산 방어력이 공격력보다 높으면 최소 데미지를 0으로 설정
+    int damage = max(
+      monPower - character.chDefense,
+      0,
+    ); //방어력 고려 데미지 계산 방어력이 공격력보다 높으면 최소 데미지를 0으로 설정
     character.chHealth -= damage; //캐릭터 체력 감소
     print('\n$monName이(가) ${character.chName}에게 $damage의 데미지를 입혔습니다.');
   }
-  //상태 출력 메서드
+
+  ///상태 출력 메서드
   void showStatus() {
     print('$monName - 체력 : $monHealth, 공격력 : $monPower');
   }

@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'monster_class.dart';
 import 'dart:io';
 
@@ -13,9 +12,8 @@ class Character {
   Monster monster = Monster();
   Random random = Random();
 
+  ///캐릭터 데이터 파일 읽어오는 메서드
   Future<void> loadCharacter() async {
-    //캐릭터 데이터 파일 읽어오는 메서드
-
     var character = File('lib/characters.txt'); //characters파일 읽어오기
 
     if (!character.existsSync()) {
@@ -37,6 +35,7 @@ class Character {
     }
   }
 
+  ///아이템 사용
   void useItem() {
     if (hasUsedItem) {
       print("⚠ 이미 아이템을 사용했습니다! 더 이상 사용할 수 없습니다.");
@@ -48,11 +47,12 @@ class Character {
     print("🎉 아이템을 사용했습니다! 이번 턴 공격력: $chPower");
   }
 
+  ///공격력 복구
   void resetPower(int originalPower) {
     chPower = originalPower; // 다음 턴에 공격력 원상복구
   }
 
-  //30% 확률로 체력 증가 기능
+  ///30% 확률로 체력 증가 기능
   void applyBonusHealth() {
     if (random.nextDouble() < 0.3) {
       // 0.0 ~ 0.99 사이 난수 발생 (30% 확률)
@@ -61,19 +61,19 @@ class Character {
     }
   }
 
+  ///캐릭터 상태 출력 메서드
   void showStatus() {
-    //캐릭터 상태 출력 메서드
     print('$chName- 체력 : $chHealth, 공격력 : $chPower, 방어력 : $chDefense');
   }
 
-  //공격 메서드
+  ///공격 메서드
   void attackMonster(Monster monster) {
     int damage = max(chPower, 0); //공격력은 최소 0이상
     monster.monHealth -= damage; //몬스터 체력감소
     print('$chName이(가) ${monster.monName}에게 $damage의 데지미를 입혔습니다.');
   }
 
-  //방어 메서드
+  ///방어 메서드
   void defend() {
     int healAmount = 0; //방어시 회복량
     chHealth += healAmount;
