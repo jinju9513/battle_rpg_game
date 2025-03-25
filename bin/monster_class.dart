@@ -10,6 +10,7 @@ class Monster {
       0; //랜덤으로 지정할 공격력 범위 최대값 (int)->몬스터의 공격력은 캐릭터의 방어력보다 작을 수 없습니다. 랜덤으로 지정하여 캐릭터의 방어력과 랜덤 값 중 최대값으로 설정해주세요.
   int monDegfense = 0; //→ 몬스터의 방어력은 0이라고 가정합니다.
   var random = Random();
+   int turnCounter = 0; // 몬스터 턴 카운트 변수
 
   ///캐릭터 데이터 파일 읽어오는 메서드
   Future<void> loadMonster(Character characterObj) async {
@@ -32,6 +33,14 @@ class Monster {
 
   ///공격 메서드
   void attackCharacter(Character character) {
+    turnCounter++; // 턴 수 증가
+
+    // 3턴마다 방어력 증가
+    if (turnCounter == 3) {
+      monDegfense += 2;
+      print('$monName의 방어력이 증가했습니다! 현재 방어력: $monDegfense');
+      turnCounter = 0;
+    }
     int damage = max(
       monPower - character.chDefense,
       0,
@@ -42,6 +51,6 @@ class Monster {
 
   ///상태 출력 메서드
   void showStatus() {
-    print('$monName - 체력 : $monHealth, 공격력 : $monPower');
+    print('$monName - 체력 : $monHealth, 공격력 : $monPower, 방어력 : $monDegfense');
   }
 }
